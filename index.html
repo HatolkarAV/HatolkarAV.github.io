@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atharva Hatolkar — Data Scientist · AI/ML · Analytics</title>
+<meta name="description" content="Atharva Hatolkar — Data Scientist and Data Analyst. MSc Data Analytics. Model evaluation, forecasting, and BI, with an engineering foundation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0d0e11;
+    --ink-2:#14161a;
+    --panel:#171a1f;
+    --line:#272b32;
+    --cream:#f3efe6;
+    --muted:#9aa0aa;
+    --muted-2:#6b7079;
+    --accent:#e0a23c;       /* signal amber */
+    --accent-soft:#f0c987;
+    --cool:#7fb0a8;         /* secondary cool tint */
+    --maxw:1120px;
+    --serif:"Fraunces",Georgia,serif;
+    --sans:"Hanken Grotesk",-apple-system,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--cream);
+    font-family:var(--sans);
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    position:relative;
+  }
+  /* faint plotting grid + radial glow */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      linear-gradient(var(--line) 1px,transparent 1px),
+      linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:54px 54px;
+    opacity:.18;
+    mask-image:radial-gradient(circle at 70% 8%,#000 0%,transparent 60%);
+    -webkit-mask-image:radial-gradient(circle at 70% 8%,#000 0%,transparent 60%);
+  }
+  body::after{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(700px 500px at 78% -5%,rgba(224,162,60,.16),transparent 70%),
+               radial-gradient(600px 600px at -10% 30%,rgba(127,176,168,.07),transparent 70%);
+  }
+  /* grain */
+  .grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  .wrap{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  a{color:inherit;text-decoration:none}
+
+  /* ---- nav ---- */
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
+    background:linear-gradient(to bottom,rgba(13,14,17,.86),rgba(13,14,17,.4));
+    border-bottom:1px solid var(--line)}
+  .nav-in{max-width:var(--maxw);margin:0 auto;padding:16px 28px;display:flex;align-items:center;justify-content:space-between}
+  .mark{font-family:var(--mono);font-size:14px;letter-spacing:.04em;color:var(--cream)}
+  .mark b{color:var(--accent)}
+  .nav-links{display:flex;gap:28px;font-size:14px;font-family:var(--mono);color:var(--muted)}
+  .nav-links a{transition:color .2s;position:relative}
+  .nav-links a:hover{color:var(--cream)}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1px;background:var(--accent);transition:width .25s}
+  .nav-links a:hover::after{width:100%}
+  @media(max-width:680px){.nav-links{display:none}}
+
+  /* ---- hero ---- */
+  header{padding:clamp(80px,16vh,170px) 0 90px}
+  .tag{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12.5px;
+    letter-spacing:.06em;color:var(--accent-soft);border:1px solid var(--line);
+    padding:7px 14px;border-radius:100px;background:rgba(224,162,60,.05)}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);
+    animation:pulse 2.2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  h1{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.02em;
+    font-size:clamp(44px,8.2vw,96px);margin:26px 0 0}
+  h1 em{font-style:italic;color:var(--accent)}
+  .lede{max-width:640px;margin-top:28px;font-size:clamp(17px,2.2vw,21px);color:var(--muted);line-height:1.6}
+  .lede b{color:var(--cream);font-weight:600}
+  .cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:40px}
+  .btn{font-family:var(--mono);font-size:13.5px;letter-spacing:.03em;padding:13px 22px;border-radius:8px;
+    border:1px solid var(--line);transition:.22s;display:inline-flex;align-items:center;gap:9px}
+  .btn.primary{background:var(--accent);color:#1a1408;border-color:var(--accent);font-weight:500}
+  .btn.primary:hover{background:var(--accent-soft);transform:translateY(-2px)}
+  .btn.ghost:hover{border-color:var(--accent);color:var(--accent-soft);transform:translateY(-2px)}
+
+  /* ---- section scaffold ---- */
+  section{padding:78px 0;position:relative}
+  .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);
+    display:flex;align-items:center;gap:12px;margin-bottom:26px}
+  .eyebrow::before{content:attr(data-n);color:var(--muted-2)}
+  .eyebrow::after{content:"";flex:1;height:1px;background:var(--line)}
+  h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,4.6vw,46px);letter-spacing:-.015em;line-height:1.08}
+
+  /* ---- about ---- */
+  .about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:54px;margin-top:34px;align-items:start}
+  .about-grid p{color:var(--muted);margin-bottom:18px}
+  .about-grid p b{color:var(--cream);font-weight:600}
+  .about-grid .serif-accent{font-family:var(--serif);font-style:italic;color:var(--accent-soft)}
+  .facts{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:6px 22px}
+  .fact{display:flex;justify-content:space-between;gap:16px;padding:15px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+  .fact:last-child{border-bottom:0}
+  .fact span{color:var(--muted-2);font-family:var(--mono);font-size:12px;letter-spacing:.03em}
+  .fact b{font-weight:500;text-align:right}
+  @media(max-width:760px){.about-grid{grid-template-columns:1fr;gap:32px}}
+
+  /* ---- skills ---- */
+  .skills{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:34px}
+  .skillcard{border:1px solid var(--line);border-radius:14px;padding:24px;background:linear-gradient(180deg,var(--ink-2),var(--ink));transition:.25s}
+  .skillcard:hover{border-color:rgba(224,162,60,.4);transform:translateY(-3px)}
+  .skillcard h3{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:16px}
+  .chips{display:flex;flex-wrap:wrap;gap:9px}
+  .chip{font-size:13.5px;padding:6px 13px;border-radius:7px;background:var(--ink-2);border:1px solid var(--line);color:var(--cream);transition:.2s}
+  .chip:hover{border-color:var(--accent);color:var(--accent-soft)}
+  @media(max-width:680px){.skills{grid-template-columns:1fr}}
+
+  /* ---- projects ---- */
+  .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:34px}
+  .proj{border:1px solid var(--line);border-radius:16px;padding:28px;background:var(--panel);
+    display:flex;flex-direction:column;position:relative;overflow:hidden;transition:.28s}
+  .proj::before{content:"";position:absolute;inset:0;background:radial-gradient(400px 200px at 100% 0,rgba(224,162,60,.1),transparent 70%);opacity:0;transition:opacity .3s}
+  .proj:hover{transform:translateY(-4px);border-color:rgba(224,162,60,.45)}
+  .proj:hover::before{opacity:1}
+  .proj-no{font-family:var(--mono);font-size:12px;color:var(--muted-2);letter-spacing:.06em}
+  .proj h3{font-family:var(--serif);font-size:24px;font-weight:500;margin:10px 0 12px;line-height:1.15}
+  .proj p{color:var(--muted);font-size:15px;line-height:1.6;flex:1}
+  .proj-tags{display:flex;flex-wrap:wrap;gap:7px;margin:18px 0 20px}
+  .proj-tags span{font-family:var(--mono);font-size:11px;color:var(--cool);border:1px solid var(--line);padding:4px 9px;border-radius:6px}
+  .proj-links{display:flex;gap:18px;font-family:var(--mono);font-size:13px}
+  .proj-links a{color:var(--accent-soft);display:inline-flex;align-items:center;gap:6px;transition:.2s}
+  .proj-links a:hover{color:var(--cream);gap:9px}
+  @media(max-width:680px){.projects{grid-template-columns:1fr}}
+
+  /* ---- experience ---- */
+  .xp{margin-top:34px;border-left:1px solid var(--line);padding-left:30px;display:flex;flex-direction:column;gap:30px}
+  .xp-item{position:relative}
+  .xp-item::before{content:"";position:absolute;left:-36px;top:7px;width:11px;height:11px;border-radius:50%;background:var(--ink);border:2px solid var(--accent)}
+  .xp-when{font-family:var(--mono);font-size:12px;color:var(--muted-2);letter-spacing:.04em}
+  .xp-item h3{font-family:var(--serif);font-size:21px;font-weight:500;margin:4px 0 3px}
+  .xp-item .where{color:var(--accent-soft);font-size:14px;margin-bottom:8px}
+  .xp-item p{color:var(--muted);font-size:15px}
+
+  /* ---- contact ---- */
+  .contact{text-align:center;padding:96px 0 40px}
+  .contact h2{margin-bottom:18px}
+  .contact .lede{margin:0 auto 36px}
+  .contact-links{display:flex;justify-content:center;flex-wrap:wrap;gap:14px}
+  footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;color:var(--muted-2);
+    font-family:var(--mono);font-size:12.5px;letter-spacing:.03em}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .stagger>*{opacity:0;transform:translateY(20px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
+  .stagger>*:nth-child(1){animation-delay:.05s}
+  .stagger>*:nth-child(2){animation-delay:.18s}
+  .stagger>*:nth-child(3){animation-delay:.32s}
+  .stagger>*:nth-child(4){animation-delay:.46s}
+  @keyframes rise{to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){.reveal,.stagger>*{opacity:1!important;transform:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<nav>
+  <div class="nav-in">
+    <a class="mark" href="#top">AH<b>.</b> </a>
+    <div class="nav-links">
+      <a href="#about">about</a>
+      <a href="#skills">skills</a>
+      <a href="#work">work</a>
+      <a href="#experience">experience</a>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<header id="top">
+  <div class="wrap stagger">
+    <span class="tag"><span class="dot"></span> Open to Data Scientist · AI · Analytics roles</span>
+    <h1>Atharva<br>Hatolkar<em>.</em></h1>
+    <p class="lede">Data scientist who turns large, messy data into <b>validated models</b> and <b>clear, decision-ready insight</b> — with an engineer's eye for whether the results actually hold up.</p>
+    <div class="cta">
+      <!-- TODO: replace # with your real links -->
+      <a class="btn primary" href="#work">View Work →</a>
+      <a class="btn ghost" href="#" target="_blank" rel="noopener">Download CV</a>
+      <a class="btn ghost" href="https://github.com/YOUR_USERNAME" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn ghost" href="#" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap reveal">
+    <div class="eyebrow" data-n="01 /">About</div>
+    <div class="about-grid">
+      <div>
+        <h2 style="margin-bottom:22px">Models I can trust,<br>insight people can act on.</h2>
+        <p>I'm completing an <b>MSc in Data Analytics</b> at the <b>University of Galway</b>, where my research benchmarks and evaluates transformer and large pretrained <span class="serif-accent">(foundation)</span> models on real-world time-series — checking not just <em>what</em> a model predicts, but whether its reasoning holds up.</p>
+        <p>Before that, <b>2.5 years</b> building SQL data pipelines, reporting, and data-quality routines for global enterprise clients — turning ambiguous business questions into specifications, dashboards, and decisions.</p>
+        <p>My slightly unusual edge: a background in <b>Electronics &amp; Telecommunications engineering</b>, so I'm as comfortable with sensor, signal, and network data as I am with ML models.</p>
+      </div>
+      <div class="facts">
+        <div class="fact"><span>Based in</span><b>Galway, Ireland</b></div>
+        <div class="fact"><span>Focus</span><b>Model evaluation · Forecasting · BI</b></div>
+        <div class="fact"><span>Studying</span><b>MSc Data Analytics</b></div>
+        <div class="fact"><span>Experience</span><b>2.5 yrs · Data &amp; Integration</b></div>
+        <div class="fact"><span>Eligibility</span><b>Eligible to work in Ireland</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap reveal">
+    <div class="eyebrow" data-n="02 /">Toolkit</div>
+    <h2>What I work with.</h2>
+    <div class="skills">
+      <div class="skillcard">
+        <h3>Languages</h3>
+        <div class="chips"><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">PL/SQL</span><span class="chip">R</span><span class="chip">Bash</span></div>
+      </div>
+      <div class="skillcard">
+        <h3>Machine Learning &amp; AI</h3>
+        <div class="chips"><span class="chip">PyTorch</span><span class="chip">scikit-learn</span><span class="chip">XGBoost</span><span class="chip">Hugging Face</span><span class="chip">Transformers</span><span class="chip">Foundation Models</span></div>
+      </div>
+      <div class="skillcard">
+        <h3>Analytics &amp; BI</h3>
+        <div class="chips"><span class="chip">Power BI</span><span class="chip">Tableau</span><span class="chip">Excel</span><span class="chip">Matplotlib</span><span class="chip">Seaborn</span><span class="chip">Plotly</span></div>
+      </div>
+      <div class="skillcard">
+        <h3>Data &amp; Tools</h3>
+        <div class="chips"><span class="chip">Google BigQuery</span><span class="chip">Git / GitHub</span><span class="chip">Jupyter</span><span class="chip">Linux</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap reveal">
+    <div class="eyebrow" data-n="03 /">Selected Work</div>
+    <h2>Things I've built.</h2>
+    <!-- TODO: swap the # links for your repo / live-demo URLs. Delete cards you don't have yet. -->
+    <div class="projects">
+      <div class="proj">
+        <span class="proj-no">P/01 — Research</span>
+        <h3>Benchmarking Foundation Models on Time-Series</h3>
+        <p>MSc capstone: training, fine-tuning, and rigorously evaluating transformers (PatchTST, iTransformer) and foundation models (TimesFM, Chronos, Moirai) against ground-truth baselines under zero-shot and fine-tuned regimes — reproducing a published methodology for fair comparison.</p>
+        <div class="proj-tags"><span>Python</span><span>PyTorch</span><span>Hugging Face</span><span>BigQuery</span></div>
+        <div class="proj-links"><a href="#" target="_blank" rel="noopener">Code →</a><a href="#" target="_blank" rel="noopener">Writeup →</a></div>
+      </div>
+      <div class="proj">
+        <span class="proj-no">P/02 — LLM</span>
+        <h3>Retrieval-Augmented Q&amp;A App</h3>
+        <p>An LLM-powered RAG application that answers questions over a document corpus, with embeddings, a vector store, and a clean interactive front end deployed for anyone to try.</p>
+        <div class="proj-tags"><span>LLM</span><span>RAG</span><span>Embeddings</span><span>Gradio</span></div>
+        <div class="proj-links"><a href="#" target="_blank" rel="noopener">Code →</a><a href="#" target="_blank" rel="noopener">Live Demo →</a></div>
+      </div>
+      <div class="proj">
+        <span class="proj-no">P/03 — ML App</span>
+        <h3>Deployed Forecasting Model</h3>
+        <p>An end-to-end machine-learning model served as an interactive web app on Hugging Face Spaces — upload data, get predictions and visual diagnostics in the browser.</p>
+        <div class="proj-tags"><span>scikit-learn</span><span>Streamlit</span><span>HF Spaces</span></div>
+        <div class="proj-links"><a href="#" target="_blank" rel="noopener">Code →</a><a href="#" target="_blank" rel="noopener">Live Demo →</a></div>
+      </div>
+      <div class="proj">
+        <span class="proj-no">P/04 — Analytics</span>
+        <h3>Ride-Demand Analytics &amp; Dashboard</h3>
+        <p>End-to-end analysis of operational ride data — cleaning, EDA, and modelling demand — with an interactive dashboard surfacing geographic and temporal trends as actionable commercial insight.</p>
+        <div class="proj-tags"><span>Python</span><span>pandas</span><span>Power BI</span></div>
+        <div class="proj-links"><a href="#" target="_blank" rel="noopener">Code →</a><a href="#" target="_blank" rel="noopener">Dashboard →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap reveal">
+    <div class="eyebrow" data-n="04 /">Path</div>
+    <h2>Where I've been.</h2>
+    <div class="xp">
+      <div class="xp-item">
+        <div class="xp-when">SEPT 2025 — AUG 2026</div>
+        <h3>MSc, Computer Science (Data Analytics)</h3>
+        <div class="where">University of Galway, Ireland</div>
+        <p>Machine learning, deep learning, NLP, statistics, and large-scale analytics — with a research capstone on foundation-model evaluation.</p>
+      </div>
+      <div class="xp-item">
+        <div class="xp-when">APR 2023 — AUG 2025</div>
+        <h3>Senior Systems Engineer (Data &amp; Integration)</h3>
+        <div class="where">Trinamix Systems · Pune, India</div>
+        <p>Built SQL pipelines, reporting, and data-quality routines across enterprise systems for global clients. Promoted within 18 months for consistent delivery and ownership.</p>
+      </div>
+      <div class="xp-item">
+        <div class="xp-when">2018 — 2022</div>
+        <h3>B.Tech, Electronics &amp; Telecommunications Engineering</h3>
+        <div class="where">Government College of Engineering, Jalgaon</div>
+        <p>Signal processing, networks, probability, and programming — the quantitative foundation under everything I do now.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap reveal">
+    <div class="eyebrow" data-n="05 /" style="justify-content:center">Contact</div>
+    <h2>Let's build something<br>worth measuring.</h2>
+    <p class="lede">Open to Data Scientist, AI/ML, and Data Analyst roles. The fastest way to reach me is email.</p>
+    <div class="contact-links">
+      <a class="btn primary" href="mailto:atharvahatokar0209@gmail.com">atharvahatokar0209@gmail.com</a>
+      <!-- TODO: replace # with your real links -->
+      <a class="btn ghost" href="https://github.com/YOUR_USERNAME" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn ghost" href="#" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  © <span id="yr"></span> Atharva Hatolkar · Built &amp; hosted on GitHub Pages
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  // scroll reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
